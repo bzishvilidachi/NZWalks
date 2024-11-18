@@ -1,10 +1,8 @@
-﻿namespace NZWalksAPI.Models.Domain
+﻿namespace NZWalksAPI.Models.DTO
 {
-	public class Region
+	public class AddRegionRequestDto
 	{
-		public Guid Id { get; set; }
 		public string Code { get; set; }
-
 		public string Name { get; set; }
 		public string? RegionImageUrl { get; set; }
 	}
