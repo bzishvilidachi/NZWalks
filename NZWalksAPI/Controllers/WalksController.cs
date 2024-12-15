@@ -42,10 +42,13 @@ namespace NZWalksAPI.Controllers
 			[FromQuery] string? sortBy, [FromQuery] bool? IsAscending,
 			[FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 1000)
 		{
-			var walkDomainModel = await _walkRepository.GetAllAsync(filterOn, filterQuery,
-				sortBy, IsAscending ?? true, pageNumber, pageSize);
+			
+				var walkDomainModel = await _walkRepository.GetAllAsync(filterOn, filterQuery,
+					sortBy, IsAscending ?? true, pageNumber, pageSize);
 
-			return Ok(_mapper.Map<List<WalkDto>>(walkDomainModel));
+		        
+				return Ok(_mapper.Map<List<WalkDto>>(walkDomainModel));
+		
 		}
 
 		[HttpGet]

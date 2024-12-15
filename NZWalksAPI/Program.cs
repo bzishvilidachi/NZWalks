@@ -8,8 +8,21 @@ using NZWalksAPI.Repositories;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.FileProviders;
+using Serilog;
+
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using NZWalksAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var logger = new LoggerConfiguration()
+	.WriteTo.Console()
+	.WriteTo.File("Logs/NZWalks_Log.txt", rollingInterval:RollingInterval.Minute)
+	.MinimumLevel.Warning()
+	.CreateLogger();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 // Add services to the container.
 
@@ -95,12 +108,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 var app = builder.Build();
 
+
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
+
+
+
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
