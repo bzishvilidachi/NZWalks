@@ -34,7 +34,7 @@ namespace NZWalksAPI.Controllers
 		{
 			try
 			{
-				throw new Exception("This is a custom exception");
+				//throw new Exception("This is a custom exception");
 
 				var regionsDomain = await _regionRepository.GetAllAsync();
 
@@ -55,7 +55,7 @@ namespace NZWalksAPI.Controllers
 
 		[HttpGet]
 		[Route("{id}")]
-		[Authorize(Roles = "Reader")]
+		//[Authorize(Roles = "Reader")]
 		public async Task<IActionResult> GetById(Guid id)
 		{
 			var regionDomain = await _regionRepository.GetByIdAsync(id);
@@ -71,7 +71,7 @@ namespace NZWalksAPI.Controllers
 
 		[HttpPost]
 		[ValidateModel]
-		[Authorize(Roles = "Writer")]
+		//[Authorize(Roles = "Writer")]
 		public async Task<IActionResult> Create([FromBody] AddRegionRequestDto addRegionRequestDto)
 		{
 			
@@ -93,7 +93,7 @@ namespace NZWalksAPI.Controllers
 		[HttpPut]
 		[Route("{id:Guid}")]
 		[ValidateModel]
-		[Authorize(Roles = "Writer")]
+		//[Authorize(Roles = "Writer")]
 		public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateRegionRequestDto updateRegionRequestDto)
 		{
 			
@@ -112,7 +112,7 @@ namespace NZWalksAPI.Controllers
 
 		[HttpDelete]
 		[Route("{id:Guid}")]
-		[Authorize(Roles = "Writer")]
+		//[Authorize(Roles = "Writer")]
 		public async Task<IActionResult> Delete([FromRoute] Guid id)
 		{
 			var regionDomainModel = await _regionRepository.DeleteAsync(id);
